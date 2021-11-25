@@ -18,5 +18,7 @@ runs:
         pip install poetry
         python -m poetry build
         pip install dist/reformat_gherkin*.whl
+      shell: bash
+    - run: |
         find ${{ inputs.path }} -type f -iname '*.feature' -print | xargs reformat_gherkin --check
       shell: bash
