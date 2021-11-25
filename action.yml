@@ -20,5 +20,7 @@ runs:
         pip install dist/reformat_gherkin*.whl
       shell: bash
     - run: |
+        ls -al
+        ls -al ~/.local/bin/
         find ${{ inputs.path }} -type f -iname '*.feature' -print | xargs reformat_gherkin --check
       shell: bash
