@@ -3,7 +3,7 @@
 ## usage
 
 ```yaml
-- uses: OneContainer/gherkin-feature-format@master
+- uses: OneContainer/gherkin-feature-format@main
   with:
     path: ci
 ```
