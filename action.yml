@@ -14,13 +14,13 @@ runs:
     - uses: actions/checkout@v2
       with:
         repository: OneContainer/reformat-gherkin
+        path: reformat-gherkin
     - run: |
         pip install poetry
         poetry build
         pip install dist/reformat_gherkin*.whl
+      working-directory: reformat-gherkin
       shell: bash
     - run: |
-        ls -al ${{ github.workspace }}
-        pwd
         find ${{ github.workspace }}/${{ inputs.path }} -type f -iname '*.feature' -print | xargs reformat-gherkin --check
       shell: bash
