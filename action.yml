@@ -1,0 +1,22 @@
+name: 'Format Gherkin feature files'
+description: 'Format Gherkin feature files'
+inputs:
+  path:
+    description: 'path to feature files'
+    required: true
+    default: '.'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
+    - uses: actions/checkout@v2
+      with:
+        repository: OneContainer/reformat-gherkin
+    - run: |
+        pip install poetry
+        python -m poetry build
+        pip install dist/reformat_gherkin*.whl
+        find ${{ inputs.path }} -type f -iname '*.feature' -print | xargs reformat_gherkin --check
+      shell: bash
