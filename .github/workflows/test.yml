@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: OneContainer/gherkin-feature-format@master
+    - uses: ./
       with:
         path: ci
