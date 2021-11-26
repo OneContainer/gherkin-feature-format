@@ -8,19 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.7'
-    - uses: actions/checkout@v2
-      with:
-        repository: OneContainer/reformat-gherkin
-        path: reformat-gherkin
     - run: |
-        pip install poetry
-        poetry build
-        pip install dist/reformat_gherkin*.whl
-      working-directory: reformat-gherkin
-      shell: bash
-    - run: |
-        find ${{ github.workspace }}/${{ inputs.path }} -type f -iname '*.feature' -print | xargs reformat-gherkin --check
+        find $PWD/${{ inputs.path }} -type f -iname '*.feature' -print | \
+        xargs docker run --rm -v $PWD/${{ inputs.path }}:$PWD/${{ inputs.path }} -w $PWD/${{ inputs.path }} xl4times/reformat-gherkin --check
       shell: bash
